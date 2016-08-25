@@ -8,15 +8,23 @@
 
 import UIKit
 import SnapKit
+import SwiftyJSON
 
-class WeatherView: UIView {
+class WeatherView: UIView, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    private let cellID = "my_cell"
+    
+    private var flowLayout = UICollectionViewFlowLayout()
+    
+    private var collectionView: UICollectionView!
+    
     //添加新城市
     lazy var addCityButton: UIButton = {
         let btn = UIButton(type: UIButtonType.ContactAdd)
         return btn
     }()
     //我的生活
-    lazy var myLife: UIButton = {
+    private lazy var myLife: UIButton = {
         let btn = UIButton()
         btn.setTitle("生活", forState: .Normal)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
@@ -25,7 +33,7 @@ class WeatherView: UIView {
         return btn
     }()
     //城市名
-    lazy var cityNameLable: UILabel = {
+    private lazy var cityNameLable: UILabel = {
         let lab = UILabel()
         lab.text = "西安"
         lab.textColor = UIColor.whiteColor()
@@ -33,7 +41,7 @@ class WeatherView: UIView {
         return lab
     }()
     //天气信息
-    lazy var weatherInfoLable: UILabel = {
+    private lazy var weatherInfoLable: UILabel = {
         let lab = UILabel()
         lab.text = "多云转晴"
         lab.textColor = UIColor.whiteColor()
@@ -41,7 +49,7 @@ class WeatherView: UIView {
         return lab
     }()
     //当前天气
-    lazy var currentTemp: UILabel = {
+    private lazy var currentTemp: UILabel = {
         let lab = UILabel()
         lab.text = "27°"
         lab.textColor = UIColor.whiteColor()
@@ -49,14 +57,14 @@ class WeatherView: UIView {
         return lab
     }()
     
-    lazy var upView: UIView = {
+    private lazy var upView: UIView = {
         let vv = UIView()
         vv.backgroundColor = UIColor.whiteColor()
         vv.alpha = 0.6
         return vv
     }()
     
-    var downView: UIView = {
+    private var downView: UIView = {
         let vv = UIView()
         vv.backgroundColor = UIColor.whiteColor()
         vv.alpha = 0.6
@@ -66,12 +74,13 @@ class WeatherView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUI()
+        setCollectionView()
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+    //MARK: - 设置界面
     func setUI() {
         for subView in subviews {
             subView.translatesAutoresizingMaskIntoConstraints = false
@@ -120,5 +129,64 @@ class WeatherView: UIView {
             make.height.equalTo(40)
             make.width.equalTo(40)
         }
+    }
+    //MARK: - 设置collectionView
+    func setCollectionView() {
+        flowLayout.itemSize = CGSizeMake(screenW, 20)
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 5, 0)
+        flowLayout.minimumLineSpacing = 5
+        
+        collectionView = UICollectionView(frame: CGRectMake(0, 201, screenW, frame.size.height - 201 - 51), collectionViewLayout: flowLayout)
+        
+        collectionView.backgroundColor = UIColor.clearColor()
+        //设置代理
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.registerClass(WeatherCollectionCell.self, forCellWithReuseIdentifier: cellID)
+        addSubview(collectionView)
+    }
+    
+    //MARK: - 设置数据
+    func setDataWith(json: JSON) {
+        print(json)
+        cityNameLable.text = json["result"]["data"]["realtime"]["city_name"].stringValue
+        weatherInfoLable.text = json["result"]["data"]["realtime"]["weather"]["info"].stringValue
+        currentTemp.text = json["result"]["data"]["realtime"]["weather"]["temperature"].stringValue + "°"
+    }
+    
+    //MARK: - 数据源 与 代理方法
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(section)
+        return 10
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! WeatherCollectionCell
+        
+        return cell
+        
+    }
+}
+//MARK: - 自定义cell
+class WeatherCollectionCell: UICollectionViewCell {
+    
+    var lab = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        lab.text = "afdad"
+        lab.textAlignment = .Center
+        lab.textColor = UIColor.whiteColor()
+        lab.frame = contentView.bounds
+        contentView.addSubview(lab)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
