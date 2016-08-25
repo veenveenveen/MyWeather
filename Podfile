@@ -8,5 +8,6 @@ target 'MyWeather' do
   # Pods for MyWeather
 pod 'Alamofire'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+pod 'SnapKit', :git => 'https://github.com/SnapKit/SnapKit.git'
 
 end

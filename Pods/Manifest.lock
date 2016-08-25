@@ -1,24 +1,32 @@
 PODS:
   - Alamofire (3.4.1)
+  - SnapKit (0.22.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire
+  - SnapKit (from `https://github.com/SnapKit/SnapKit.git`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
+  SnapKit:
+    :git: https://github.com/SnapKit/SnapKit.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 CHECKOUT OPTIONS:
+  SnapKit:
+    :commit: 54dee3a7ca9777c2989fb3b85fab5264e5174f99
+    :git: https://github.com/SnapKit/SnapKit.git
   SwiftyJSON:
     :commit: 73670b94292b8d8496c398a973f56ac67789ba9f
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
 
 SPEC CHECKSUMS:
   Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  SnapKit: 0dd2fd157330f1ea11fd84da13e6be8a7a22bae0
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 7430fc78e468573060ce50862097afd496b3eacd
+PODFILE CHECKSUM: 4634c05ad49ff0ebc84fe9c15469b34d76dd9df5
 
 COCOAPODS: 1.0.1
