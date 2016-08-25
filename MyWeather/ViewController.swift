@@ -16,6 +16,8 @@ class ViewController: UIViewController, SearchEnabled {
     
     var queryView: QueryView!
     
+    var lifeView: LifeView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,9 +39,14 @@ class ViewController: UIViewController, SearchEnabled {
         view.addSubview(queryView)
         queryView.delegate = self
         
+        lifeView = LifeView(frame: CGRectMake(0, view.bounds.height, view.bounds.width, view.bounds.height))
+        view.addSubview(lifeView)
+        
         queryView.cancelButton.addTarget(self, action: #selector(cancelQuery), forControlEvents: .TouchUpInside)
         
         weatherView.addCityButton.addTarget(self, action: #selector(searchNewCity), forControlEvents: .TouchUpInside)
+        weatherView.myLife.addTarget(self, action: #selector(lifeButtonClick), forControlEvents: .TouchUpInside)
+        lifeView.backButton.addTarget(self, action: #selector(backButtonClick), forControlEvents: .TouchUpInside)
     }
     
     func searchNewCity() {
@@ -52,6 +59,19 @@ class ViewController: UIViewController, SearchEnabled {
         queryView.searchBar1.resignFirstResponder()
         UIView.animateWithDuration(0.3) {
             self.queryView.frame.origin.y = self.view.bounds.size.height
+        }
+    }
+    
+    func lifeButtonClick() {
+        print("qq")
+        UIView.animateWithDuration(0.3) {
+            self.lifeView.frame.origin.y = 0
+        }
+    }
+    
+    func backButtonClick() {
+        UIView.animateWithDuration(0.3) {
+            self.lifeView.frame.origin.y = self.view.bounds.size.height
         }
     }
     //代理方法实现 
@@ -67,6 +87,7 @@ class ViewController: UIViewController, SearchEnabled {
                 let json = JSON(v)
                 //设置数据
                 self.weatherView.setDataWith(json)
+                self.lifeView.setDataWith(json)
             }
         }
     }

@@ -24,7 +24,7 @@ class WeatherView: UIView, UICollectionViewDelegate, UICollectionViewDataSource 
         return btn
     }()
     //我的生活
-    private lazy var myLife: UIButton = {
+    lazy var myLife: UIButton = {
         let btn = UIButton()
         btn.setTitle("生活指数", forState: .Normal)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
