@@ -26,7 +26,7 @@ class WeatherView: UIView, UICollectionViewDelegate, UICollectionViewDataSource 
     //我的生活
     private lazy var myLife: UIButton = {
         let btn = UIButton()
-        btn.setTitle("生活", forState: .Normal)
+        btn.setTitle("生活指数", forState: .Normal)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         btn.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         btn.titleLabel?.font = UIFont.systemFontOfSize(17, weight: UIFontWeightLight)
@@ -81,7 +81,7 @@ class WeatherView: UIView, UICollectionViewDelegate, UICollectionViewDataSource 
         fatalError("init(coder:) has not been implemented")
     }
     //MARK: - 设置界面
-    func setUI() {
+    private func setUI() {
         for subView in subviews {
             subView.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -131,7 +131,7 @@ class WeatherView: UIView, UICollectionViewDelegate, UICollectionViewDataSource 
         }
     }
     //MARK: - 设置collectionView
-    func setCollectionView() {
+    private func setCollectionView() {
         flowLayout.itemSize = CGSizeMake(screenW, 20)
         flowLayout.sectionInset = UIEdgeInsetsMake(0, 0, 5, 0)
         flowLayout.minimumLineSpacing = 5
