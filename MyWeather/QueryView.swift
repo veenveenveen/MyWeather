@@ -41,7 +41,7 @@ class QueryView: UIView, UISearchBarDelegate {
     }
     
     func setUI() {
-        backgroundColor = UIColor(colorLiteralRed: 75/255.0, green: 132/255.0, blue: 177/255.0, alpha: 0.98)
+        backgroundColor = UIColor(colorLiteralRed: 75/255.0, green: 132/255.0, blue: 177/255.0, alpha: 0.5)
         
         for subview in subviews {
             subview.translatesAutoresizingMaskIntoConstraints = false

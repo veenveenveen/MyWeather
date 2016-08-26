@@ -10,11 +10,16 @@ import UIKit
 import SwiftyJSON
 
 extension UILabel {
-    convenience init(fontSize: CGFloat, isLine: Bool) {
+    convenience init(color: UIColor) {
         self.init()
-        textColor = UIColor.whiteColor()
+        textColor = color
         textAlignment = .Left
-        font = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightLight)
+        if screenH < 600 {
+            font = UIFont.systemFontOfSize(13, weight: UIFontWeightLight)
+        }
+        else {
+            font = UIFont.systemFontOfSize(15, weight: UIFontWeightLight)
+        }
         numberOfLines = 0
         sizeToFit()
     }
@@ -32,25 +37,25 @@ class LifeView: UIView {
     lazy var backButton: UIButton = {
        let btn = UIButton()
         btn.setTitle("返回", forState: .Normal)
+        btn.titleLabel?.font = UIFont.systemFontOfSize(16)
         btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         btn.setTitleColor(UIColor.lightGrayColor(), forState: .Highlighted)
         return btn
     }()
     
+    private var ganmao: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var ganmao: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var kongtiao: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var kongtiao: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var chuanyi: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var chuanyi: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var yundong: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var yundong: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var ziwaixian: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var ziwaixian: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var wuran: UILabel = UILabel(color: UIColor.whiteColor())
     
-    private var wuran: UILabel = UILabel(fontSize: 15, isLine: true)
-    
-    private var xiche: UILabel = UILabel(fontSize: 15, isLine: true)
+    private var xiche: UILabel = UILabel(color: UIColor.whiteColor())
     
     private lazy var topLine: UIView = {
         let v = UIView()
@@ -119,16 +124,17 @@ class LifeView: UIView {
     }
     
     func setUI() {
-        
-        backgroundColor = UIColor(colorLiteralRed: 75/255.0, green: 132/255.0, blue: 177/255.0, alpha: 1.0)
+        backgroundColor = UIColor.clearColor()
+//        backgroundColor = UIColor(colorLiteralRed: 75/255.0, green: 132/255.0, blue: 177/255.0, alpha: 1.0)
         
         for subview in subviews {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
-        
+    
         addSubview(title)
         addSubview(backButton)
         addSubview(topLine)
+        addSubview(ganmao)
         addSubview(ganmao)
         addSubview(kongtiao)
         addSubview(chuanyi)
@@ -236,19 +242,18 @@ class LifeView: UIView {
             make.height.equalTo(1)
         }
     }
-    
+    //MARK: - 设置数据
     func setDataWith(json: JSON) {
-        ganmao.text = getTextWith("感冒", str2: "ganmao", js: json)
-        kongtiao.text = getTextWith("空调", str2: "kongtiao", js: json)
-        chuanyi.text = getTextWith("穿衣", str2: "chuanyi", js: json)
-        yundong.text = getTextWith("运动", str2: "yundong", js: json)
+        ganmao.text = getTextWith("感冒指数", str2: "ganmao", js: json)
+        kongtiao.text = getTextWith("空调指数", str2: "kongtiao", js: json)
+        chuanyi.text = getTextWith("穿衣指数", str2: "chuanyi", js: json)
+        yundong.text = getTextWith("运动指数", str2: "yundong", js: json)
         ziwaixian.text = getTextWith("紫外线", str2: "ziwaixian", js: json)
-        wuran.text = getTextWith("污染", str2: "wuran", js: json)
-        xiche.text = getTextWith("洗车", str2: "xiche", js: json)
+        wuran.text = getTextWith("污染指数", str2: "wuran", js: json)
+        xiche.text = getTextWith("洗车指数", str2: "xiche", js: json)
     }
     
     func getTextWith(str1: String, str2: String, js: JSON) -> String {
         return "\(str1)\(":") \(js["result"]["data"]["life"]["info"][str2][0].stringValue)\n\t\t\t\t\t\t\t\(js["result"]["data"]["life"]["info"][str2][1].stringValue)"
     }
-
 }

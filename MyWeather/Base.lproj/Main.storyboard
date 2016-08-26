@@ -20,14 +20,22 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_0482.JPG" translatesAutoresizingMaskIntoConstraints="NO" id="Q8Y-gg-ymJ">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="PNQ-fB-tff">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <constraints>
+                            <constraint firstItem="PNQ-fB-tff" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0ou-AT-sfe"/>
                             <constraint firstItem="Q8Y-gg-ymJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="6r1-Qh-sGd"/>
                             <constraint firstItem="Q8Y-gg-ymJ" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="LRk-du-fgc"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Q8Y-gg-ymJ" secondAttribute="bottom" id="P1X-Ex-oB5"/>
+                            <constraint firstItem="PNQ-fB-tff" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="TMz-7P-rb2"/>
                             <constraint firstAttribute="trailing" secondItem="Q8Y-gg-ymJ" secondAttribute="trailing" id="ox4-EU-YTQ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="PNQ-fB-tff" id="RBn-5b-O6u"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
